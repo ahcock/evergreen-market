@@ -7,6 +7,7 @@ import {
   selectCartTotal,
 } from '../../redux/cart/cart.reselect';
 import CheckoutItem from '../checkout-item/checkout-item.component';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 
 const CheckoutPage = ({ cartItems, total }) => (
   <div className="checkout-page">
@@ -34,6 +35,11 @@ const CheckoutPage = ({ cartItems, total }) => (
     <div className="total">
       <span>TOTAL: ${total}</span>
     </div>
+    <div className="test-warning">
+      *다음 크레딧 카드 번호를 테스트용으로 사용해 보세요 <br />
+      4242 4242 4242 4242 - EXP: 01:2022 - CVV: 123
+    </div>
+    <StripeCheckoutButton price={total} />
   </div>
 );
 
