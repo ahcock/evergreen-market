@@ -12,12 +12,6 @@ import Header from './components/header/header.component.jsx';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component.jsx';
 import CheckoutPage from './pages/checkout/checkout.component';
 
-const HatsPage = () => (
-  <div>
-    <h1>HATS PAGE</h1>
-  </div>
-);
-
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
