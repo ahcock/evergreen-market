@@ -15,7 +15,6 @@ const config = {
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
-
   const userRef = firestore.doc(`users/${userAuth.uid}`); //Auth 응답.uid
   const snapShot = await userRef.get();
 
@@ -33,6 +32,36 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 firebase.initializeApp(config);
+
+export const addCollectionAndDocument = async (collectionKey, objectToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+
+  objectToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc(); // doc()에 인자를 줄수 있음, 없을시  firebase에서 자동생성
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit(); // return Promise
+};
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transfornedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transfornedCollection.reduce((acc, collection) => {
+    acc[collection.title.toLowerCase()] = collection;
+    return acc;
+  }, {});
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
