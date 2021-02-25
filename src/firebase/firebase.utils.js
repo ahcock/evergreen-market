@@ -66,6 +66,16 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+// redux-persist가 하던일을 reudx-saga로 옮기기 위해, currentUser를 체크하는 로직
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider); // 지금은 구글만 쓰지만, 다양한 popup이 존재, 트위터, 페북 등등
