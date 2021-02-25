@@ -66,8 +66,8 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider); // 지금은 구글만 쓰지만, 다양한 popup이 존재, 트위터, 페북 등등
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider); // 지금은 구글만 쓰지만, 다양한 popup이 존재, 트위터, 페북 등등
 
 export default firebase; // 혹시 firebase 라이브러리 자체가 필요할 때를 대비해서
