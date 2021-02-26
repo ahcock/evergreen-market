@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const MenuItemContainer = styled.div`
-  min-width: 30%;
   height: 240px;
+  min-width: 30%;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@ export const MenuItemContainer = styled.div`
     }
   }
 
-  ${({ size }) => (size === 'large' ? 'height:380px;' : '')}
+  ${({ size }) => (size === 'large' ? 'height:380px;' : 'height:240px')}
 
   &:first-child {
     margin-right: 7.5px;
@@ -32,6 +32,10 @@ export const MenuItemContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 200px;
   }
 `;
 
