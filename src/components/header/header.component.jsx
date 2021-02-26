@@ -2,7 +2,6 @@ import React from 'react';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { connect } from 'react-redux';
-import { auth } from '../../firebase/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { selectHiddenStatus } from '../../redux/cart/cart.reselect';
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -22,8 +21,8 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
         <Logo className="logo" />
       </LogoContainer>
       <Options>
-        <OptionLink to="shop">SHOP</OptionLink>
-        <OptionLink to="/shop">CONTACT</OptionLink>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        {/* <OptionLink to="/shop">CONTACT</OptionLink> */}
         {currentUser ? (
           <OptionLink as="div" onClick={signOutStart}>
             SIGN OUT
